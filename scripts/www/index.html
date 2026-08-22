@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>家庭四季相册</title>
+    <style id="theme-vars">
+/* Family Seasons Album — warm neutral + amber primary */
+:root {
+  --album-bg: #faf8f5;
+  --album-surface: #ffffff;
+  --album-surface-2: #f5f1eb;
+  --album-ink: #2c2420;
+  --album-ink-2: #6b5f57;
+  --album-ink-3: #9e9289;
+  --album-line: #e8e0d7;
+  --album-brand: #c17f45;
+  --album-brand-ink: #ffffff;
+  --album-muted: #f3efe9;
+  --album-muted-ink: #7a6f66;
+  --album-ring: #c17f45;
+
+  --album-radius-sm: 4px;
+  --album-radius-md: 8px;
+  --album-radius-lg: 16px;
+
+  --album-shadow-1: 0 1px 2px rgba(44, 36, 32, 0.05), 0 1px 1px rgba(44, 36, 32, 0.03);
+  --album-shadow-2: 0 8px 24px -8px rgba(44, 36, 32, 0.18);
+
+  --album-font: Inter, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+}
+
+@theme inline {
+  --color-background: var(--album-bg);
+  --color-foreground: var(--album-ink);
+  --color-card: var(--album-surface);
+  --color-card-foreground: var(--album-ink);
+  --color-popover: var(--album-surface);
+  --color-popover-foreground: var(--album-ink);
+  --color-primary: var(--album-brand);
+  --color-primary-foreground: var(--album-brand-ink);
+  --color-muted: var(--album-muted);
+  --color-muted-foreground: var(--album-muted-ink);
+  --color-border: var(--album-line);
+  --color-input: var(--album-line);
+  --color-ring: var(--album-ring);
+  --radius-sm: var(--album-radius-sm);
+  --radius-md: var(--album-radius-md);
+  --radius-lg: var(--album-radius-lg);
+}
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--album-bg);
+    --color-foreground: var(--album-ink);
+    --color-card: var(--album-surface);
+    --color-card-foreground: var(--album-ink);
+    --color-popover: var(--album-surface);
+    --color-popover-foreground: var(--album-ink);
+    --color-primary: var(--album-brand);
+    --color-primary-foreground: var(--album-brand-ink);
+    --color-muted: var(--album-muted);
+    --color-muted-foreground: var(--album-muted-ink);
+    --color-border: var(--album-line);
+    --color-input: var(--album-line);
+    --color-ring: var(--album-ring);
+    --radius-sm: var(--album-radius-sm);
+    --radius-md: var(--album-radius-md);
+    --radius-lg: var(--album-radius-lg);
+  }
+  @layer base {
+    body { background: var(--album-bg); color: var(--album-ink); font-family: var(--album-font); }
+    td, th { word-break: break-word; }
+    th { white-space: nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--album-bg); }
+      .text-background { color: var(--album-bg); }
+      .border-background { border-color: var(--album-bg); }
+      .ring-background { --tw-ring-color: var(--album-bg); }
+      .bg-foreground { background-color: var(--album-ink); }
+      .text-foreground { color: var(--album-ink); }
+      .border-foreground { border-color: var(--album-ink); }
+      .ring-foreground { --tw-ring-color: var(--album-ink); }
+      .bg-card { background-color: var(--album-surface); }
+      .text-card { color: var(--album-surface); }
+      .border-card { border-color: var(--album-surface); }
+      .ring-card { --tw-ring-color: var(--album-surface); }
+      .bg-card-foreground { background-color: var(--album-ink); }
+      .text-card-foreground { color: var(--album-ink); }
+      .border-card-foreground { border-color: var(--album-ink); }
+      .ring-card-foreground { --tw-ring-color: var(--album-ink); }
+      .bg-popover { background-color: var(--album-surface); }
+      .text-popover { color: var(--album-surface); }
+      .border-popover { border-color: var(--album-surface); }
+      .ring-popover { --tw-ring-color: var(--album-surface); }
+      .bg-popover-foreground { background-color: var(--album-ink); }
+      .text-popover-foreground { color: var(--album-ink); }
+      .border-popover-foreground { border-color: var(--album-ink); }
+      .ring-popover-foreground { --tw-ring-color: var(--album-ink); }
+      .bg-primary { background-color: var(--album-brand); }
+      .text-primary { color: var(--album-brand); }
+      .border-primary { border-color: var(--album-brand); }
+      .ring-primary { --tw-ring-color: var(--album-brand); }
+      .bg-primary-foreground { background-color: var(--album-brand-ink); }
+      .text-primary-foreground { color: var(--album-brand-ink); }
+      .border-primary-foreground { border-color: var(--album-brand-ink); }
+      .ring-primary-foreground { --tw-ring-color: var(--album-brand-ink); }
+      .bg-muted { background-color: var(--album-muted); }
+      .text-muted { color: var(--album-muted); }
+      .border-muted { border-color: var(--album-muted); }
+      .ring-muted { --tw-ring-color: var(--album-muted); }
+      .bg-muted-foreground { background-color: var(--album-muted-ink); }
+      .text-muted-foreground { color: var(--album-muted-ink); }
+      .border-muted-foreground { border-color: var(--album-muted-ink); }
+      .ring-muted-foreground { --tw-ring-color: var(--album-muted-ink); }
+      .bg-border { background-color: var(--album-line); }
+      .text-border { color: var(--album-line); }
+      .border-border { border-color: var(--album-line); }
+      .ring-border { --tw-ring-color: var(--album-line); }
+      .bg-input { background-color: var(--album-line); }
+      .text-input { color: var(--album-line); }
+      .border-input { border-color: var(--album-line); }
+      .ring-input { --tw-ring-color: var(--album-line); }
+      .bg-ring { background-color: var(--album-ring); }
+      .text-ring { color: var(--album-ring); }
+      .border-ring { border-color: var(--album-ring); }
+      .ring-ring { --tw-ring-color: var(--album-ring); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] { display: inline-flex; align-items: center; justify-content: center; }
+      .album-reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.3, 0, 0, 1), transform 0.7s cubic-bezier(0.3, 0, 0, 1); }
+      .album-reveal.visible { opacity: 1; transform: translateY(0); }
+      .photo-card { transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s cubic-bezier(0.2, 0.8, 0.2, 1); }
+      .photo-card:hover { transform: translateY(-4px); box-shadow: var(--album-shadow-2); }
+      .photo-card img { transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
+      .photo-card:hover img { transform: scale(1.03); }
+      @media (prefers-reduced-motion: reduce) {
+        .album-reveal { transition: none; }
+        .photo-card, .photo-card img { transition: none; }
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased bg-background text-foreground">
+    <main>
+        <!-- 封面 -->
+        <section id="cover" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <img src="../assets/image_0_gscg6j.jpg" alt="全家福" class="w-full h-full object-cover opacity-90">
+                <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60"></div>
+            </div>
+            <div class="relative z-10 text-center px-6 max-w-3xl mx-auto album-reveal visible">
+                <p class="text-white/80 text-sm md:text-base tracking-[0.2em] uppercase mb-4">Family Album</p>
+                <h1 class="text-white text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tight mb-6" style="text-wrap: balance; line-height: 1.05;">家庭四季相册</h1>
+                <p class="text-white/90 text-lg md:text-xl font-light mb-8">春生夏长 · 秋收冬藏 · 岁岁年年</p>
+                <div class="inline-flex items-center gap-2 text-white/70 text-sm">
+                    <i data-lucide="chevron-down" class="w-5 h-5"></i>
+                    <span>向下翻阅</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 春 -->
+        <section id="spring" class="py-24 md:py-32 px-6 bg-background">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex items-end gap-6 mb-16 album-reveal">
+                    <div>
+                        <p class="text-muted-foreground text-sm tracking-widest uppercase mb-2">Spring</p>
+                        <h2 class="text-4xl md:text-5xl font-semibold text-foreground">春 · 花开</h2>
+                    </div>
+                    <div class="flex-1 h-px bg-border mb-4"></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <figure class="photo-card rounded-2xl overflow-hidden bg-card shadow-1 album-reveal" style="transition-delay: 0ms;">
+                        <div class="aspect-[4/5] overflow-hidden">
+                            <img src="../assets/image_1_udwvf9.jpg" alt="春日樱花" class="w-full h-full object-cover">
+                        </div>
+                        <figcaption class="px-4 py-3 text-sm text-muted-foreground">2023 樱花盛开</figcaption>
+                    </figure>
+                    <figure class="photo-card rounded-2xl overflow-hidden bg-card shadow-1 album-reveal" style="transition-delay: 80ms;">
+                        <div class="aspect-[4/5] overflow-hidden">
+                            <img src="../assets/image_2_q2yxez.jpg" alt="油菜花田" class="w-full h-full object-cover">
+                        </div>
+                        <figcaption class="px-4 py-3 text-sm text-muted-foreground">2025 油菜花海</figcaption>
+                    </figure>
+                    <figure class="photo-card rounded-2xl overflow-hidden bg-card shadow-1 album-reveal" style="transition-delay: 160ms;">
+                        <div class="aspect-[4/5] overflow-hidden">
+                            <img src="../assets/image_3_1c9zgx.jpg" alt="樱花小径" class="w-full h-full object-cover">
+                        </div>
+                        <figcaption class="px-4 py-3 text-sm text-muted-foreground">2025 漫步花径</figcaption>
+                    </figure>
+                    <figure class="photo-card rounded-2xl overflow-hidden bg-card shadow-1 album-reveal" style="transition-delay: 240ms;">
+                        <div class="aspect-[4/5] overflow-hidden">
+                            <img src="../assets/image_4_5tws62.jpg" alt="石榴花开" class="w-full h-full object-cover">
+                        </div>
+                        <figcaption class="px-4 py-3 text-sm text-muted-foreground">2025 石榴花开</figcaption>
+                    </figure>
+                    <figure class="photo-card rounded-2xl overflow-hidden bg-card shadow-1 album-reveal" style="transition-delay: 320ms;">
+                        <div class="aspect-[4/5] overflow-hidden">
+                            <img src="../assets/image_5_5t3hve.jpg" alt="春日祖孙" class="w-full h-full object-cover">
+                        </div>
+                        <figcaption class="px-4 py-3 text-sm text-muted-foreground">2025 桥边同行</figcaption>
+                    </figure>
+                    <figure class="photo-card rounded-2xl overflow-hidden bg-card shadow-1 album-reveal" style="transition-delay: 400ms;">
+                        <div class="aspect-[4/5] overflow-hidden">
+                            <img src="../assets/image_6_po9rb.jpg" alt="母子居家" class="w-full h-full object-cover">
+                        </div>
+                        <figcaption class="px-4 py-3 text-sm text-muted-foreground">2025 居家时光</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- 夏 -->
+        <section id="summer" class="py-24 md:py-32 px-6 bg-muted">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex items-end gap-6 mb-16 album-reveal">
+                    <div>
+                        <p class="text-muted-foreground text-sm tracking-widest uppercase mb-2">Summer</p>
+                        <h2 class="text-4xl md:text-5xl font-semibold text-foreground">夏 · 绿荫</h2>
+                    </div>
+                    <div class="flex-1 h-px bg-border mb-4"></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <figure class="photo-card rounded-2xl overflow-hidden bg-card shadow-1 album-reveal" style="transition-delay: 0ms;">
+                        <div class="aspect-[4/5] overflow-hidden">
+                            <img src="../assets/image_7_gaopgt.jpg" alt="夏日榕树" class="w-full h-full object-cover">
+                        </div>
+                        <figcaption class="px-4 py-3 text-sm text-muted-foreground">2023 榕荫夏日</figcaption>
+                    </figure>
+                    <figure class="photo-card rounded-2xl overflow-hidden bg-card shadow-1 album-reveal" style="transition-delay: 80ms;">
+                        <div class="aspect-[4/5] overflow-hidden">
+                            <img src="../assets/image_8_3163oq.jpg" alt="公园合影" class="w-full h-full object-cover">
+                        </div>
+                        <figcaption class="px-4 py-3 text-sm text-muted-foreground">2025 公园时光</figcaption>
+                    </figure>
+                    <figure class="photo-card rounded-2xl overflow-hidden bg-card shadow-1 album-reveal" style="transition-delay: 160ms;">
+                        <div class="aspect-[4/5] overflow-hidden">
+                            <img src="../assets/image_9_nvbovs.jpg" alt="古祠游览" class="w-full h-full object-cover">
+                        </div>
+                        <figcaption class="px-4 py-3 text-sm text-muted-foreground">2025 古祠留影</figcaption>
+                    </figure>
+                    <figure class="photo-card rounded-2xl overflow-hidden bg-card shadow-1 album-reveal" style="transition-delay: 240ms;">
+                        <div class="aspect-[4/5] overflow-hidden">
+                            <img src="../assets/image_10_qkt9zh.jpg" alt="花墙前" class="w-full h-full object-cover">
+                        </div>
+                        <figcaption class="px-4 py-3 text-sm text-muted-foreground">2025 花墙记忆</figcaption>
+                    </figure>
+                    <figure class="photo-card rounded-2xl overflow-hidden bg-card shadow-1 album-reveal" style="transition-delay: 320ms;">
+                        <div class="aspect-[4/5] overflow-hidden">
+                            <img src="../assets/image_11_zihd8v.jpg" alt="夏日全家自拍" class="w-full h-full object-cover">
+                        </div>
+                        <figcaption class="px-4 py-3 text-sm text-muted-foreground">2023 街头自拍</figcaption>
+                    </figure>
+                    <figure class="photo-card rounded-2xl overflow-hidden bg-card shadow-1 album-reveal" style="transition-delay: 400ms;">
+                        <div class="aspect-[4/5] overflow-hidden">
+                            <img src="../assets/image_12_79qt6q.jpg" alt="祖孙公园" class="w-full h-full object-cover">
+                        </div>
+                        <figcaption class="px-4 py-3 text-sm text-muted-foreground">2023 公园相伴</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- 秋 -->
+        <section id="autumn" class="py-24 md:py-32 px-6 bg-background">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex items-end gap-6 mb-16 album-reveal">
+                    <div>
+                        <p class="text-muted-foreground text-sm tracking-widest uppercase mb-2">Autumn</p>
+                        <h2 class="text-4xl md:text-5xl font-semibold text-foreground">秋 · 丰收</h2>
+                    </div>
+                    <div class="flex-1 h-px bg-border mb-4"></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <figure class="photo-card rounded-2xl overflow-hidden bg-card shadow-1 album-reveal">
+                        <div class="aspect-[4/5] overflow-hidden">
+                            <img src="../assets/image_13_9xr4w5.jpg" alt="秋日苹果" class="w-full h-full object-cover">
+                        </div>
+                        <figcaption class="px-4 py-3 text-sm text-muted-foreground">秋日果实</figcaption>
+                    </figure>
+                    <figure class="photo-card rounded-2xl overflow-hidden bg-card shadow-1 album-reveal">
+                        <div class="aspect-[4/3] overflow-hidden">
+                            <img src="../assets/image_14_lqxedt.jpg" alt="湖畔秋光" class="w-full h-full object-cover">
+                        </div>
+                        <figcaption class="px-4 py-3 text-sm text-muted-foreground">2023 湖畔秋光</figcaption>
+                    </figure>
+                    <figure class="photo-card rounded-2xl overflow-hidden bg-card shadow-1 album-reveal">
+                        <div class="aspect-[4/3] overflow-hidden">
+                            <img src="../assets/image_9_nvbovs.jpg" alt="古祠合影" class="w-full h-full object-cover">
+                        </div>
+                        <figcaption class="px-4 py-3 text-sm text-muted-foreground">2025 古祠同游</figcaption>
+                    </figure>
+                    <figure class="photo-card rounded-2xl overflow-hidden bg-card shadow-1 album-reveal">
+                        <div class="aspect-[4/3] overflow-hidden">
+                            <img src="../assets/image_15_nrrekl.jpg" alt="父子同行" class="w-full h-full object-cover">
+                        </div>
+                        <figcaption class="px-4 py-3 text-sm text-muted-foreground">2019 父子同游</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- 冬 -->
+        <section id="winter" class="py-24 md:py-32 px-6 bg-muted">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex items-end gap-6 mb-16 album-reveal">
+                    <div>
+                        <p class="text-muted-foreground text-sm tracking-widest uppercase mb-2">Winter</p>
+                        <h2 class="text-4xl md:text-5xl font-semibold text-foreground">冬 · 雪韵</h2>
+                    </div>
+                    <div class="flex-1 h-px bg-border mb-4"></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <figure class="photo-card rounded-2xl overflow-hidden bg-card shadow-1 album-reveal" style="transition-delay: 0ms;">
+                        <div class="aspect-[4/5] overflow-hidden">
+                            <img src="../assets/image_16_h08kju.jpg" alt="雪中雏菊" class="w-full h-full object-cover">
+                        </div>
+                        <figcaption class="px-4 py-3 text-sm text-muted-foreground">2025 雪中花</figcaption>
+                    </figure>
+                    <figure class="photo-card rounded-2xl overflow-hidden bg-card shadow-1 album-reveal" style="transition-delay: 80ms;">
+                        <div class="aspect-[4/5] overflow-hidden">
+                            <img src="../assets/image_17_vj9y5s.jpg" alt="雪中身影" class="w-full h-full object-cover">
+                        </div>
+                        <figcaption class="px-4 py-3 text-sm text-muted-foreground">2025 雪中行</figcaption>
+                    </figure>
+                    <figure class="photo-card rounded-2xl overflow-hidden bg-card shadow-1 album-reveal" style="transition-delay: 160ms;">
+                        <div class="aspect-[4/5] overflow-hidden">
+                            <img src="../assets/image_18_czcgkl.jpg" alt="雪中长辈" class="w-full h-full object-cover">
+                        </div>
+                        <figcaption class="px-4 py-3 text-sm text-muted-foreground">2025 瑞雪迎春</figcaption>
+                    </figure>
+                    <figure class="photo-card rounded-2xl overflow-hidden bg-card shadow-1 album-reveal" style="transition-delay: 240ms;">
+                        <div class="aspect-[4/5] overflow-hidden">
+                            <img src="../assets/image_19_p380i5.jpg" alt="桥边合影" class="w-full h-full object-cover">
+                        </div>
+                        <figcaption class="px-4 py-3 text-sm text-muted-foreground">2026 桥边留影</figcaption>
+                    </figure>
+                    <figure class="photo-card rounded-2xl overflow-hidden bg-card shadow-1 album-reveal" style="transition-delay: 320ms;">
+                        <div class="aspect-[4/5] overflow-hidden">
+                            <img src="../assets/image_19_p380i5.jpg" alt="祖孙街头" class="w-full h-full object-cover">
+                        </div>
+                        <figcaption class="px-4 py-3 text-sm text-muted-foreground">2026 街头同行</figcaption>
+                    </figure>
+                    <figure class="photo-card rounded-2xl overflow-hidden bg-card shadow-1 album-reveal" style="transition-delay: 400ms;">
+                        <div class="aspect-[4/5] overflow-hidden">
+                            <img src="../assets/image_20_3qz555.jpg" alt="母子自拍" class="w-full h-full object-cover">
+                        </div>
+                        <figcaption class="px-4 py-3 text-sm text-muted-foreground">2026 雪中自拍</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- 封底 -->
+        <section id="back-cover" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <img src="../assets/image_11_zihd8v.jpg" alt="全家福" class="w-full h-full object-cover opacity-90">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-black/40"></div>
+            </div>
+            <div class="relative z-10 text-center px-6 max-w-3xl mx-auto album-reveal visible">
+                <h2 class="text-white text-4xl md:text-6xl font-semibold tracking-tight mb-6" style="text-wrap: balance; line-height: 1.1;">家的温度，四季常在</h2>
+                <p class="text-white/80 text-lg md:text-xl font-light">愿每一个季节，都有彼此的陪伴</p>
+            </div>
+        </section>
+    </main>
+    <script>
+        lucide.createIcons();
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.album-reveal:not(.visible)').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
